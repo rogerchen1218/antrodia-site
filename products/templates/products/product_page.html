@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<div class="container" style="padding: 140px 20px 80px;">
+    <div style="display: flex; gap: 50px; flex-wrap: wrap;">
+        {# Product Image #}
+        <div style="flex: 1; min-width: 300px;">
+            {% if page.main_image %}
+            {% image page.main_image width-800 as img %}
+            <img src="{{ img.url }}" alt="{{ page.title }}" style="width: 100%; border-radius: 10px;">
+            {% endif %}
+        </div>
+
+        {# Product Info #}
+        <div style="flex: 1; min-width: 300px;">
+            <span class="product-tag">{{ page.get_product_type_display }}</span>
+            <h1 style="color: var(--primary-color); margin: 10px 0 20px;">{{ page.title }}</h1>
+
+            {% if page.triterpenoids or page.polysaccharides %}
+            <div style="background: var(--light-bg); padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+                <h3 style="margin-bottom: 10px;">活性指標</h3>
+                <ul style="list-style: none;">
+                    {% if page.triterpenoids %}
+                    <li><strong>三萜類:</strong> {{ page.triterpenoids }}</li>
+                    {% endif %}
+                    {% if page.polysaccharides %}
+                    <li><strong>多醣體:</strong> {{ page.polysaccharides }}</li>
+                    {% endif %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="rich-text">
+                {{ page.full_description|richtext }}
+            </div>
+
+            {% if page.usage_instructions %}
+            <div style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
+                <h4>使用建議</h4>
+                {{ page.usage_instructions|richtext }}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

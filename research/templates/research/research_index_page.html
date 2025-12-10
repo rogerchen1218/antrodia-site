@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+<div class="container" style="padding: 120px 20px 60px;">
+    <h1 style="text-align: center; margin-bottom: 40px;">{{ page.title }}</h1>
+
+    <div style="max-width: 900px; margin: 0 auto;">
+        {% for post in page.get_children.specific %}
+        <div class="research-item">
+            <div style="flex: 1;">
+                <div class="research-meta">
+                    <span style="font-weight: 700; color: var(--accent-color);">[{{ post.get_category_display }}]</span>
+                    <span>{{ post.publication_date }}</span> | <span>{{ post.institution }}</span>
+                </div>
+                <a href="{% pageurl post %}" class="research-title">{{ post.title }}</a>
+                <div style="margin-top: 10px; color: #555;">
+                    {{ post.summary|richtext|truncatechars_html:150 }}
+                </div>
+            </div>
+            <div>
+                <a href="{% pageurl post %}" class="btn" style="border: 1px solid #ddd;">閱讀詳情</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

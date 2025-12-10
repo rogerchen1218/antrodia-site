@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<div class="container" style="padding: 120px 20px 60px;">
+    <h1 style="text-align: center; margin-bottom: 20px;">{{ page.title }}</h1>
+    <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+        {{ page.intro|richtext }}
+    </div>
+
+    <div class="product-grid">
+        {% for post in page.get_children.specific %}
+        <article class="product-card">
+            <a href="{% pageurl post %}">
+                <div class="product-image">
+                    {% if post.main_image %}
+                    {% image post.main_image fill-400x300 as img %}
+                    <img src="{{ img.url }}" alt="{{ post.title }}"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                    {% else %}
+                    <span>暫無圖片</span>
+                    {% endif %}
+                </div>
+                <div class="product-info">
+                    <span class="product-tag">{{ post.get_product_type_display }}</span>
+                    <h2 class="product-title">{{ post.title }}</h2>
+                    <p style="font-size: 0.9rem; color: #666;">{{ post.short_description|truncatechars:60 }}</p>
+                </div>
+            </a>
+        </article>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
