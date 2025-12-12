@@ -3,12 +3,43 @@
 
 {% block content %}
 {# Hero Section #}
-<div class="hero-section"
-    style="background-image: url('{% static 'images/hero-bg.png' %}'); background-size: cover; background-position: center;">
-    <div class="container hero-content">
-        <h1 class="hero-title">{{ page.hero_title }}</h1>
-        <p class="hero-subtitle">{{ page.hero_subtitle }}</p>
-        <a href="/products/" class="btn btn-primary">探索我們的產品</a>
+{# Hero Carousel #}
+<div class="hero-carousel">
+    {% if page.carousel_images.all %}
+    {% for slide in page.carousel_images.all %}
+    <div class="carousel-slide {% if forloop.first %}active{% endif %}"
+        style="background-image: url('{% if slide.image %}{% image slide.image fill-1920x1080 as bg_img %}{{ bg_img.url }}{% else %}{% static 'images/hero-bg.png' %}{% endif %}');">
+        <div class="container hero-content">
+            <h1 class="hero-title">{{ slide.title|default:page.hero_title }}</h1>
+            <p class="hero-subtitle">{{ slide.subtitle|default:page.hero_subtitle }}</p>
+            <a href="/products/" class="btn btn-primary">探索我們的產品</a>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    {# Fallback static hero #}
+    <div class="carousel-slide active" style="background-image: url('{% static 'images/hero-bg.png' %}');">
+        <div class="container hero-content">
+            <h1 class="hero-title">{{ page.hero_title }}</h1>
+            <p class="hero-subtitle">{{ page.hero_subtitle }}</p>
+            <a href="/products/" class="btn btn-primary">探索我們的產品</a>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="carousel-controls">
+        <button class="carousel-prev" onclick="moveSlide(-1)">&#10094;</button>
+        <button class="carousel-next" onclick="moveSlide(1)">&#10095;</button>
+    </div>
+
+    <div class="carousel-dots">
+        {% if page.carousel_images.all %}
+        {% for slide in page.carousel_images.all %}
+        <span class="dot {% if forloop.first %}active{% endif %}" onclick="currentSlide({{ forloop.counter0 }})"></span>
+        {% endfor %}
+        {% else %}
+        <span class="dot active"></span>
+        {% endif %}
     </div>
 </div>
 
@@ -16,7 +47,7 @@
 {% if page.trust_indicators %}
 <div class="trust-section">
     <div class="container">
-        <h2 style="text-align: center; color: var(--primary-color);">為什麼選擇我們？</h2>
+        <h2 class="section-title">為什麼選擇我們？</h2>
         <div class="trust-grid">
             {% for block in page.trust_indicators %}
             <div class="trust-card">
@@ -38,8 +69,8 @@
 
 {# Simple About Teaser #}
 <div class="container" style="padding: 100px 20px; text-align: center;">
-    <h2 style="color: var(--primary-color); margin-bottom: 20px;">源自科學，忠於純粹</h2>
-    <p style="max-width: 800px; margin: 0 auto; color: #666;">
+    <h2 class="section-title">源自科學，忠於純粹</h2>
+    <p style="max-width: 800px; margin: 0 auto; color: var(--text-light); font-size: 1.1rem;">
         我們堅持使用經過基因鑑定的野生牛樟芝菌種，利用獨家固態培養技術，
         確保每一份原料都含有高濃度的三萜類與多醣體。
     </p>

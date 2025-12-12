@@ -1,0 +1,439 @@
+/* CSS Variables & Design System */
+:root {
+    /* Color Palette - Professional Biotech */
+    --primary-color: #0B3C5D;
+    /* Deep Ocean Blue - Trust, Stability */
+    --primary-light: #155582;
+    /* Lighter shade for hover */
+    --secondary-color: #328CC1;
+    /* Scientific Blue - Innovation */
+    --accent-color: #D9B310;
+    /* Muted Gold - Premium details (Used sparingly) */
+
+    /* Neutral Tones */
+    --bg-color: #F9FAFB;
+    /* Clinical White/Grey - Cleanliness */
+    --surface-color: #FFFFFF;
+    /* Pure White - Cards */
+    --text-main: #1D2731;
+    /* Dark Slate - Softer than black */
+    --text-light: #67748E;
+    /* Cool Grey - Secondary text */
+    --border-color: #E2E8F0;
+    /* Light Border */
+
+    /* Typography */
+    --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+
+    /* Effects */
+    --shadow-sm: 0 2px 4px rgba(11, 60, 93, 0.04);
+    --shadow-md: 0 10px 40px -10px rgba(11, 60, 93, 0.1);
+    --shadow-lg: 0 20px 60px -15px rgba(11, 60, 93, 0.15);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: var(--font-main);
+    line-height: 1.8;
+    /* Increased for readability */
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+ul {
+    list-style: none;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Header & Navigation */
+.site-header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow-sm);
+    height: 80px;
+}
+
+.site-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.main-nav a {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+.main-nav a:hover {
+    color: var(--secondary-color);
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: inline-block;
+    transition: var(--transition);
+    border: none;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: #ffffff;
+    box-shadow: 0 4px 14px rgba(11, 60, 93, 0.3);
+}
+
+.btn-primary:hover {
+    background: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(11, 60, 93, 0.4);
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 200px 0 140px;
+    background: linear-gradient(135deg, #F0F4F8 0%, #FFFFFF 100%);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Subtle background accent for Hero */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 80%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(50, 140, 193, 0.05) 0%, transparent 70%);
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    line-height: 1.2;
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    margin-bottom: 40px;
+    font-weight: 400;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Sections General */
+.section-title {
+    font-size: 2rem;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 60px;
+    font-weight: 700;
+}
+
+/* Trust Indicators */
+.trust-section {
+    padding: 100px 0;
+    background: var(--surface-color);
+}
+
+.trust-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.trust-card {
+    background: var(--surface-color);
+    padding: 48px 32px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.trust-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--secondary-color);
+}
+
+.trust-icon {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 24px;
+}
+
+.trust-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+    color: var(--primary-color);
+}
+
+.trust-card p {
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+/* Product Cards */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px;
+    margin: 60px 0;
+}
+
+.product-card {
+    background: var(--surface-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.product-image {
+    height: 240px;
+    background: #F1F5F9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+}
+
+.product-info {
+    padding: 32px;
+}
+
+.product-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.product-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+}
+
+/* Research List */
+.research-item {
+    background: var(--surface-color);
+    padding: 40px;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.research-item:hover {
+    border-color: var(--secondary-color);
+    box-shadow: var(--shadow-md);
+}
+
+.research-meta {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.research-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* Footer */
+.site-footer {
+    background: var(--primary-color);
+    color: rgba(255, 255, 255, 0.8);
+    padding: 100px 0 40px;
+    margin-top: 120px;
+}
+
+.site-footer h3 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-bottom: 24px;
+}
+
+.site-footer a {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.site-footer a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.site-footer .container {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    /* More space for brand column */
+    gap: 60px;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 60px;
+    padding-top: 30px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Page Headers (About, Products, etc.) */
+/* Ensuring padding handles fixed header */
+.page-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.page-header h1 {
+    font-size: 2.8rem;
+    color: var(--primary-color);
+    font-weight: 800;
+}
+
+.page-header .intro {
+    font-size: 1.25rem;
+    color: var(--text-light);
+    max-width: 700px;
+    margin: 20px auto 0;
+}
+
+/* Rich Text Content */
+.rich-text {
+    color: var(--text-main);
+    font-size: 1.1rem;
+    line-height: 1.9;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.rich-text p {
+    margin-bottom: 24px;
+}
+
+.rich-text h3 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-top: 48px;
+    margin-bottom: 24px;
+}
+
+.rich-text ul {
+    list-style: disc;
+    padding-left: 24px;
+    margin-bottom: 24px;
+}
+
+.rich-text li {
+    margin-bottom: 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .site-header {
+        height: auto;
+        padding: 15px 0;
+    }
+
+    .site-header .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .hero-section {
+        padding: 160px 0 80px;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .site-footer .container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}

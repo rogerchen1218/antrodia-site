@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from wagtail.models import Page, Site
-from home.models import HomePage
+from home.models import HomePage, StandardPage, HomePageCarouselImages
 from products.models import ProductIndexPage, ProductPage
 from research.models import ResearchIndexPage, ResearchPage
 import datetime
@@ -118,5 +118,41 @@ class Command(BaseCommand):
             )
             research_index.add_child(instance=sample_research)
             sample_research.save_revision().publish()
+
+        # 6. Create About Page
+        if not StandardPage.objects.filter(slug='about').exists():
+            self.stdout.write("Creating About Us Page...")
+            about_page = StandardPage(
+                title="關於我們",
+                intro="德杏天下生技 - 專注於牛樟芝菌種培育與活性成分萃取",
+                body="<p>德杏天下生物科技有限公司成立於2005年，致力於台灣特有種牛樟芝的培育與研究。我們擁有獨家的固態培養技術，能有效提升牛樟芝子實體中的三萜類與多醣體含量，並通過多項SGS檢驗認證。</p><h3>我們的核心價值</h3><ul><li><strong>科學驗證：</strong>所有產品皆經過嚴格的科學實驗與數據佐證。</li><li><strong>品質保證：</strong>從菌種培育到產品生產，全程嚴格控管。</li><li><strong>永續經營：</strong>堅持使用人工培育菌種，不採集野生牛樟芝，保護台灣森林生態。</li></ul>",
+                slug="about"
+            )
+            homepage.add_child(instance=about_page)
+            about_page.save_revision().publish()
+        else:
+            self.stdout.write("About Us Page already exists.")
+
+
+        # 7. Create Carousel Slides
+        if not HomePageCarouselImages.objects.filter(page=homepage).exists():
+            self.stdout.write("Creating Carousel Slides...")
+            # Slide 1
+            HomePageCarouselImages.objects.create(
+                page=homepage,
+                title="源自台灣森林的紅寶石",
+                subtitle="二十年固態培養技術，科學驗證的健康守護",
+                sort_order=0
+            )
+            # Slide 2
+            HomePageCarouselImages.objects.create(
+                page=homepage,
+                title="頂尖生物科技",
+                subtitle="獨家萃取工藝，保存最高活性成分",
+                sort_order=1
+            )
+            homepage.save_revision().publish()
+        else:
+             self.stdout.write("Carousel slides already exist.")
 
         self.stdout.write(self.style.SUCCESS('Successfully loaded demo data!'))

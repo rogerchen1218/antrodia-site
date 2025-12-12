@@ -1,9 +1,31 @@
 from django.db import models
 
-from wagtail.models import Page
+from wagtail.models import Page, Orderable
 from wagtail.fields import RichTextField, StreamField
-from wagtail.admin.panels import FieldPanel
+from wagtail.admin.panels import FieldPanel, InlinePanel
+from modelcluster.fields import ParentalKey
 from wagtail import blocks
+from wagtail.search import index
+
+
+class HomePageCarouselImages(Orderable):
+    page = ParentalKey("home.HomePage", related_name="carousel_images")
+    image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=False,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        verbose_name="輪播圖片",
+    )
+    title = models.CharField(max_length=100, blank=True, verbose_name="標題 (選填)")
+    subtitle = models.CharField(max_length=250, blank=True, verbose_name="副標題 (選填)")
+
+    panels = [
+        FieldPanel("image"),
+        FieldPanel("title"),
+        FieldPanel("subtitle"),
+    ]
 
 
 class HomePage(Page):
@@ -35,9 +57,9 @@ class HomePage(Page):
     )
 
     content_panels = Page.content_panels + [
+        InlinePanel("carousel_images", label="輪播圖片", min_num=1),
         FieldPanel("hero_title"),
         FieldPanel("hero_subtitle"),
-        FieldPanel("hero_image"),
         FieldPanel("trust_indicators"),
     ]
 
@@ -45,3 +67,21 @@ class HomePage(Page):
     
     class Meta:
         verbose_name = "首頁"
+
+
+class StandardPage(Page):
+    intro = models.CharField(max_length=250, verbose_name="頁面簡介", blank=True)
+    body = RichTextField(verbose_name="頁面內容")
+
+    search_fields = Page.search_fields + [
+        index.SearchField('intro'),
+        index.SearchField('body'),
+    ]
+
+    content_panels = Page.content_panels + [
+        FieldPanel('intro'),
+        FieldPanel('body'),
+    ]
+
+    class Meta:
+        verbose_name = "通用頁面 (標準)"
