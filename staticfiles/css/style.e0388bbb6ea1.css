@@ -36,10 +36,10 @@ body {
     font-family: var(--font-main);
     line-height: 1.8;
     -webkit-font-smoothing: antialiased;
-    /* Tech Texture Background - Amplified */
+    /* Tech Texture Background */
     background-image:
-        radial-gradient(#CBD5E1 1.5px, transparent 1.5px);
-    background-size: 24px 24px;
+        radial-gradient(var(--border-color) 1px, transparent 1px);
+    background-size: 40px 40px;
 }
 
 a {
@@ -156,13 +156,13 @@ ul {
     /* Fixed height for carousel */
     overflow: hidden;
     background: #000;
-    /* Organic Shape - Amplified */
-    border-bottom-left-radius: 50% 80px;
-    border-bottom-right-radius: 50% 80px;
-    margin-bottom: -60px;
+    /* Organic Shape */
+    border-bottom-left-radius: 50% 40px;
+    border-bottom-right-radius: 50% 40px;
+    margin-bottom: -40px;
     /* Pull content up */
     z-index: 10;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
 .carousel-slide {
@@ -563,10 +563,8 @@ ul {
 /* Scroll Animation Classes */
 .reveal-on-scroll {
     opacity: 0;
-    transform: translateY(50px);
-    /* More movement */
-    transition: opacity 1.5s ease-out, transform 1.5s ease-out;
-    /* Slower */
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     will-change: opacity, transform;
 }
 

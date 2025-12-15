@@ -50,7 +50,7 @@
         <h2 class="section-title">為什麼選擇我們？</h2>
         <div class="trust-grid">
             {% for block in page.trust_indicators %}
-            <div class="trust-card">
+            <div class="trust-card reveal-on-scroll">
                 <div class="trust-icon">
                     {% if block.value.icon_class %}
                     <i class="{{ block.value.icon_class }}"></i>
@@ -68,7 +68,7 @@
 {% endif %}
 
 {# Simple About Teaser #}
-<div class="container" style="padding: 100px 20px; text-align: center;">
+<div class="container reveal-on-scroll" style="padding: 100px 20px; text-align: center;">
     <h2 class="section-title">源自科學，忠於純粹</h2>
     <p style="max-width: 800px; margin: 0 auto; color: var(--text-light); font-size: 1.1rem;">
         我們堅持使用經過基因鑑定的野生牛樟芝菌種，利用獨家固態培養技術，
