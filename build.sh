@@ -13,3 +13,7 @@ if [[ -n "$DJANGO_SUPERUSER_USERNAME" ]] && [[ -n "$DJANGO_SUPERUSER_PASSWORD" ]
     echo "Creating superuser..."
     python manage.py createsuperuser --no-input || echo "Superuser creation skipped (might already exist)"
 fi
+
+# Automatically load demo data (Homepage, Products, Research) if they don't exist
+echo "Checking and loading demo data..."
+python manage.py load_demo_data

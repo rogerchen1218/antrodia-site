@@ -33,16 +33,16 @@ class Command(BaseCommand):
             homepage = HomePage(title="Home", slug="home")
             root.add_child(instance=homepage)
             
-        homepage.title = "Antrodia 頂尖生技"
-        homepage.hero_title = "源自台灣森林的紅寶石"
-        homepage.hero_subtitle = "二十年固態培養技術，科學驗證的健康守護"
-        
-        # Add basic trust indicators (StreamField)
-        # Note: StreamFields are complex to set programmatically via python shell without StreamBlock logic, 
-        # but we can set simple fields easily. We will skip complex StreamField populating to avoid errors
-        # and focus on main pages structure.
-        
-        homepage.save_revision().publish()
+            homepage.title = "Antrodia 頂尖生技"
+            homepage.hero_title = "源自台灣森林的紅寶石"
+            homepage.hero_subtitle = "二十年固態培養技術，科學驗證的健康守護"
+            
+            # Add basic trust indicators (StreamField)
+            # Note: StreamFields are complex to set programmatically via python shell without StreamBlock logic, 
+            # but we can set simple fields easily. We will skip complex StreamField populating to avoid errors
+            # and focus on main pages structure.
+            
+            homepage.save_revision().publish()
 
         # CRITICAL FIX: Set this new homepage as the "Root" of the Site
         # Otherwise Wagtail keeps showing the default "Welcome" page
