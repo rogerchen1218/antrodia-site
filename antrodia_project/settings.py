@@ -15,6 +15,9 @@ ALLOWED_HOSTS = ["*"]
 # On production, you might want to limit this, e.g.:
 # ALLOWED_HOSTS = ["your-app-name.onrender.com", "localhost", "127.0.0.1"]
 
+# Render requires this for admin login via HTTPS
+CSRF_TRUSTED_ORIGINS = ["https://*.onrender.com"]
+
 # Application definition
 
 INSTALLED_APPS = [
